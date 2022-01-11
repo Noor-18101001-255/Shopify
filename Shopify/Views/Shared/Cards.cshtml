@@ -1,0 +1,30 @@
+﻿@model OrderModel
+ 
+
+<div class="card   ">
+    <div class="card-body row " style="overflow: hidden ; position: relative;">
+        <img class="col-sm-12  col-md-3" src="~/Images/Items/@Model.ImageName" alt="Card image cap">
+        <div class="col-sm-12 col-md-9 mt-sm-5 ">
+            <div class="row justify-content-between   ">
+
+                <h5 class="card-title ">@Model.Name</h5>
+                @using (Html.BeginForm("Delete", "Invoice", new { id = Model.Id }, FormMethod.Post, true, new { @class = "col-2  " }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <button asp-controller="Invoice" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger  "><span class="fa fa-trash-alt"></span></button>
+                }
+            </div>
+            <p class="card-text">@Model.Description</p>
+            <div class="row justify-content-between my-auto">
+                
+                @*<button asp-controller="Invoice" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger col-4 mt-auto text-center"><span class="fa fa-trash-alt"></span></button>*@
+                <h5 class="card-title mr-4 "> Price @Model.Price.ToString("f")$  </h5>
+                    <h5 class="card-title mr-4 ">Quantity:  @Model.Quantity.ToString("f")$  </h5>
+                    <h5 class="card-title mr-4 ">Total: @Model.Total.ToString("f") $ </h5>
+
+
+            </div>
+        </div>
+    </div>
+</div>

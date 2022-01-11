@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Shopify.Models.OrderModel>
+@inject JRuntime js
+@{
+    ViewData["Title"] = "Invoice - ViewOrder";
+}
+<div class="text-center">
+
+    <h1>Orders</h1>
+
+    <p>
+        <a asp-action="CreateOrder" class="btn btn-outline-info text-dark">Make Order</a>
+    </p>
+</div>
+<div class="col-10 offset-1">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <partial name="Cards" model="item"/>
+        }
+    }
+    else
+    {
+        <h4>No Data Found</h4>
+    }
+
+</div>
+@section Scripts
+{
+    <script>
+    @js.JavascriptToRun
+
+    function ShowErrorPopup() {
+        var url = "/Invoice/CreateOrder";
+        $.get(url, function (data) {
+            $("#PopupContent").html(data);
+            $("#ModalHeading").text('Create');
+            $("#PopupModal").modal("show");
+        });
+    }
+
+
+    </script>
+}
